@@ -4,4 +4,4 @@
 *.sql
 *.sqlite
 
-.env
+.env*
