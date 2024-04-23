@@ -1,6 +1,26 @@
 <script>
+  let email = '', password = ''
 
-
+  const submit = async() => {
+      const response = await fetch('http://localhost:8000/auth/login', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          credentials: "include",
+          body: JSON.stringify({
+              email,
+              password
+          })
+      });
+      const content = await response.json();
+      if (content.type == "PATIENT") {
+        window.location.href = '/specialist';
+        console.log(content.last_name);
+      }
+      else {
+        window.location.href = '/patient';
+        console.log(content.email);
+      }
+  }
 </script>
 
 <style>
@@ -22,10 +42,11 @@
   </div>
 <div class ="container">
 <container>
-<form id="email" action="/apply/" method="POST">
+<form on:submit|preventDefault={submit}>
   <label>
     Email:
     <input
+      bind:value={email}
       type="text"
       name="name"
       id="name"
@@ -36,7 +57,7 @@
 
   <label>
     Пароль:
-    <input type="text" name="password" required>
+    <input bind:value={password} type="text" name="password" required>
   </label>
   <button type="submit">Войти</button>
   <!-- <label>
@@ -45,7 +66,7 @@
   </label> -->
   <label>
     Еще нет аккаунта?:
-    <button type="submit">Зарегистрироваться</button>
+    <button type="button">Зарегистрироваться</button>
   </label>
   </form>
 </container>
