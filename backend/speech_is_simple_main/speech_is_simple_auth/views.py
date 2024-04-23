@@ -65,9 +65,9 @@ class UserView(APIView):
         
         user = User.objects.filter(id=payload['id']).first()
         if (user.type == "SPECIALIST"):
-            serializer = SpecialistSerializer(user)
+            serializer = SpecialistSerializer(Specialist.objects.filter(id=payload['id']).first())
         elif (user.type == "PATIENT"):
-            serializer = PatientSerializer(user)
+            serializer = PatientSerializer(Patient.objects.filter(id=payload['id']).first())
         
         return Response(serializer.data)
     

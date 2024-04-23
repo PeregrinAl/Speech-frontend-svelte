@@ -4,7 +4,7 @@ from .models import Patient, Specialist
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient
-        fields = ['first_name', 'last_name', 'email', 'type','password']
+        fields = ['first_name', 'last_name', 'email', 'type','password', 'date_of_birth']
         extra_kwargs = {
             'password': {'write_only': True}
         }
