@@ -5,7 +5,7 @@
     }*/
     @font-face {
         font-family: Desyatiy;
-        src: url('fonts/Desyatiy.ttf');
+        src: url('static/fonts/Desyatiy.ttf');
       }
       .container {
         padding: 50px;
@@ -107,6 +107,25 @@
             top: calc(50% - 7px);
             cursor: pointer;
           }
+          .registerButton {
+            background-color: transparent;
+            display: block;
+            min-width: 210px;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            margin: 10px;
+            padding: 9px 15px;
+            color: #4dda59;
+            font-size: 18px;
+            font-weight: 300;
+            font-family: inherit;
+            transition: background-color 0.2s linear;
+          }
+          .registerButton:hover {
+            background-color: #f5dcf2;
+            cursor: pointer;
+            transition: background-color 0.2s linear;
+          }
       
           button {
             display: block;
@@ -115,7 +134,7 @@
             border-radius: 6px;
             margin: 10px;
             padding: 9px 15px;
-            color: #df9bce;;
+            color: #df9bce;
             font-size: 18px;
             font-weight: 300;
             font-family: inherit;
@@ -123,18 +142,18 @@
           }
       
           button:hover {
-            background-color: #6cda5e;
+            background-color: #bbe4b6;
             cursor: pointer;
             transition: background-color 0.2s linear;
           }
       
           button:focus-visible {
-            border: 2px solid #6cda5e;
+            border: 2px solid #bbe4b6;
             outline: none;
           }
       
           button:focus {
-            border: 2px solid #6cda5e;
+            border: 2px solid #bbe4b6;
             outline: none;
           }
       

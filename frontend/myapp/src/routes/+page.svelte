@@ -2,6 +2,7 @@
   let email = '', password = ''
 
   const submit = async() => {
+    try {
       const response = await fetch('http://localhost:8000/auth/login', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
@@ -13,13 +14,17 @@
       });
       const content = await response.json();
       if (content.type == "PATIENT") {
-        window.location.href = '/specialist';
+        window.location.href = '/patient';
         console.log(content.last_name);
       }
       else {
-        window.location.href = '/patient';
+        window.location.href = '/specialist';
         console.log(content.email);
       }
+    } catch {
+
+
+    }
   }
 </script>
 
@@ -65,8 +70,8 @@
     запомнить меня
   </label> -->
   <label>
-    Еще нет аккаунта?:
-    <button type="button">Зарегистрироваться</button>
+    Еще нет аккаунта?
+    <button class='registerButton' type="button">Зарегистрироваться</button>
   </label>
   </form>
 </container>
