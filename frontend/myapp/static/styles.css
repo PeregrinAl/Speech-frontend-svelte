@@ -1,0 +1,179 @@
+/*    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }*/
+    @font-face {
+        font-family: Desyatiy;
+        src: url('fonts/Desyatiy.ttf');
+      }
+      .container {
+        padding: 50px;
+        margin: 50px;
+        border-radius: 57px;
+        background: rgb(255, 255, 255);
+      }
+      h1 {
+        font-family: Desyatiy;
+        margin: 50px;
+        color: rgb(255, 179, 247, 210);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100px;
+        width: 500px;
+      }
+      p {
+        font-family: Desyatiy; 
+        font-size: 3ch;
+        margin: 50px;
+        color: rgb(237, 237, 237);
+      }
+          body {
+            min-height: 100vh;
+            padding: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgb(137, 155, 173, 255);
+            color: rgb(135, 138, 184);
+            font-family: "Roboto", sans-serif;
+            font-size: 18px;
+          }
+      
+          label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+          }
+      
+          input {
+            margin: 10px;
+            border: 2px solid rgb(137, 155, 173);
+            border-radius: 6px;
+            padding: 10px 15px;
+            background-color: transparent;
+            color: rgb(137, 155, 173);
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: 300;
+            -webkit-appearance: none;
+            appearance: none;
+          }
+      
+          input:focus {
+            border-color: rgb(135, 138, 184);
+            outline: none;
+          }
+      
+          option {
+            font-weight: inherit;
+            font-family: inherit;
+            font-size: inherit;
+          }
+      
+          checkbox-wrapper {
+            position: relative;
+          }
+      
+          checkbox {
+            width: 24px;
+            height: 24px;
+            opacity: 0;
+            margin-right: 15px;
+          }
+      
+          checkbox + checkbox-title::before {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border: 1px solid rgb(137, 155, 173);
+            left: 0;
+            top: calc(50% - 12px);
+            border-radius: 6px;
+            cursor: pointer;
+          }
+      
+          checkbox:checked + checkbox-title::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background-color: rgb(135, 138, 184);
+            border-radius: 3px;
+            left: 5px;
+            top: calc(50% - 7px);
+            cursor: pointer;
+          }
+      
+          button {
+            display: block;
+            min-width: 210px;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            margin: 10px;
+            padding: 9px 15px;
+            color: #df9bce;;
+            font-size: 18px;
+            font-weight: 300;
+            font-family: inherit;
+            transition: background-color 0.2s linear;
+          }
+      
+          button:hover {
+            background-color: #6cda5e;
+            cursor: pointer;
+            transition: background-color 0.2s linear;
+          }
+      
+          button:focus-visible {
+            border: 2px solid #6cda5e;
+            outline: none;
+          }
+      
+          button:focus {
+            border: 2px solid #6cda5e;
+            outline: none;
+          }
+      
+          button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+      
+          hidden {
+            display:none;
+          }
+      
+          #loader {
+            width: 350px;
+            margin-top: 25px;
+            margin-left: auto;
+            text-align: center;
+          }
+      
+          @media (max-width: 768px) {
+            body {
+              padding: 30px;
+            }
+      
+            label {
+              display: block;
+            }
+      
+            input-title {
+              margin-right: auto;
+              margin-bottom: 10px;
+            }
+      
+            input, button, select, checkbox-wrapper, file-selector, input-title {
+              display: block;
+              width: 100%;
+            }
+      
+            #loader {
+              width: 100%;
+            }
+          }
