@@ -1,6 +1,9 @@
 <script>
-  let email = '', password = ''
+  import {authenticated} from '../stores/auth';
+  import { goto } from '$app/navigation';
 
+  let email = '', password = ''
+  
   const submit = async() => {
     try {
       const response = await fetch('http://localhost:8000/auth/login', {
@@ -13,17 +16,20 @@
           })
       });
       const content = await response.json();
-      if (content.type == "PATIENT") {
-        window.location.href = '/patient';
-        console.log(content.last_name);
+      if (content.type == "SPECIALIST") {
+        authenticated.set(true);
+        goto('/specialist');
+      }
+      else if (content.type == "PATIENT")  {
+        authenticated.set(true);
+        goto('/patient');
       }
       else {
-        window.location.href = '/specialist';
-        console.log(content.email);
+        
       }
     } catch {
-
-
+      authenticated.set(false);
+      console.log(auth);
     }
   }
 </script>
@@ -32,10 +38,10 @@
 @import "/static/styles.css";
 </style>
 
-<body>
+<div class="login">
   <div>
-  <h1 class="h1Pink">Учиться говорить - легко!</h1>
-  <p>
+  <h1 class="h1welcome">Учиться говорить - легко!</h1>
+  <p class="pwelcome">
       Добро пожаловать в сервис 
       «Говорить - легко»! 
       <br>
@@ -45,6 +51,7 @@
       <br>Начните свой путь к улучшению речи вместе с нами сегодня!
   </p>
   </div>
+
 <div class ="container">
 <container>
 <form on:submit|preventDefault={submit}>
@@ -65,14 +72,11 @@
     <input bind:value={password} type="text" name="password" required>
   </label>
   <button type="submit">Войти</button>
-  <!-- <label>
-    <input type="checkbox" name="remember_me" value="1">
-    запомнить меня
-  </label> -->
   <label>
     Еще нет аккаунта?
     <button class='registerButton' type="button">Зарегистрироваться</button>
   </label>
   </form>
 </container>
-</body>
+</div>
+</div>
