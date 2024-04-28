@@ -1,0 +1,3 @@
+frontend/myapp/src/routes/register/patient/+page.svelte --- Съезжает фон при первом запуске, при перезагрузке норм
+frontend/myapp/src/routes/register/patient/+page.svelte --- Не работает dataPicker, из-за него не работает регистрация
+frontend/myapp/src/routes/register/specialist/+page.svelte --- Нужно добавить загрузку файла jpg/pdf с дипломом

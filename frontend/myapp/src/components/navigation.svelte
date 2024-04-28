@@ -46,10 +46,19 @@ li a:hover {
 </style>
 
 <ul class="navbar-nav me-auto mb-2 mb-md-0">
+    {#if auth == true}
     <li class="nav-item">
         <a href="/" class="nav-link" on:click={logout}>Выйти</a>
     </li>
     <li class="nav-item">
         <a href="/" class="nav-link">О себе</a>
     </li>
+    {:else}
+    <li>
+        <a href="/" class="nav-link">О сервисе</a>
+    </li>
+    <li>
+        <a href="/auth" class="nav-link">Войти</a>
+    </li>
+    {/if}
 </ul>

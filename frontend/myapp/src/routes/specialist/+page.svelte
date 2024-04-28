@@ -11,18 +11,18 @@
 				headers: {'Content-Type': 'application/json'},
 				credentials: "include",
 				body: JSON.stringify({
-					id
+					patientId
 				})
 			});
 			const content = await response.json();
-			if (content.type == "SPECIALIST") {
-
+			if (content.message == "success") {
+				// TODO:
 			}
-			else if (content.type == "PATIENT")  {
-
+			else if (content.message == "already exist")  {
+				// TODO:
 			}
 			else {
-
+				// TODO:
 			}
 		} 
 		
