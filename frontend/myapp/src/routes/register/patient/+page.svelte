@@ -62,7 +62,12 @@
           <input bind:value={password} type="password" name="password" id="password" autocomplete="new-password" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
         </div>
       </div>
-      <Datepicker bind:value={date_of_birth} name="date_of_birth" datepickerFormat="yyyy-mm-dd" datepickerOrientation="right"/>
+      <div class="sm:col-span-1">
+        <label for="date_of_birth" class="block text-sm font-semibold leading-6 text-gray-900">Дата рождения</label>
+        <div class="mt-2.5">
+          <input bind:value={date_of_birth} type="password" name="date_of_birth" id="date_of_birth" autocomplete="bday" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        </div>
+      </div>    
     </div>
     <div class="mt-10">
       <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Зарегистрироваться</button>
