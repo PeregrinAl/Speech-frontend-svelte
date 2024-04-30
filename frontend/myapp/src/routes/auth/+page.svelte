@@ -1,7 +1,6 @@
 <script>
   import {authenticated} from '../../stores/auth';
   import { goto } from '$app/navigation';
-  import Nav from '$lib/Navigation.svelte';
 
   let email = '', password = ''
   
@@ -34,7 +33,6 @@
     }
   }
 </script>
-<Nav/>
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Войти в аккаунт</h2>

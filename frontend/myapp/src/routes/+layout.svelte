@@ -1,5 +1,6 @@
 <script>
     import "../app.css";
-  </script>
-  
-  <slot />
+    import Nav from '$lib/Navigation.svelte';
+</script>
+<Nav/>
+<slot />

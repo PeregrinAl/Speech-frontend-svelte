@@ -1,10 +1,8 @@
 <script>
   import {authenticated} from '../stores/auth';
   import { goto } from '$app/navigation';
-  import Nav from '$lib/Navigation.svelte';
 
 </script>
-<Nav/>
   <div class="container mx-auto rounded-md text-center px-40 py-10">
     <h1 class="text-3xl font-mono font-bold tracking-tight text-gray-900 sm:text-6xl">Сервис для логопедов и людей с нарушениями речи</h1>
     <p class="mt-6 text-xl font-mono leading-8 text-gray-700">Серис предназначен для обеспечения удаленного взаимодействия логопедов и людей с нарушениями речи</p>
