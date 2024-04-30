@@ -1,7 +1,7 @@
 <script>
   import {authenticated} from '../../stores/auth';
   import { goto } from '$app/navigation';
-  import Nav from '../../components/Navigation.svelte';
+  import Nav from '$lib/Navigation.svelte';
 
   let email = '', password = ''
   

@@ -1,6 +1,6 @@
 <script>
-    import Nav from '../../components/Navigation.svelte';
-    import Modal from '../../components/Modal.svelte';
+    import Nav from '$lib/Navigation.svelte';
+    import Modal from '$lib/Modal.svelte';
     let showModal = false;
     let patientId = 0;
 	const addUser = async() => {

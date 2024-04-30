@@ -1,5 +1,5 @@
 <script>
-  import Nav from '../../../components/Navigation.svelte';
+  import Nav from '$lib/Navigation.svelte';
   export let role="специалиста";
 </script>
 <Nav/>

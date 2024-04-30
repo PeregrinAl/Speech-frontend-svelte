@@ -1,5 +1,5 @@
 <script>
-  import Nav from '../../../components/Navigation.svelte';
+  import Nav from '$lib/Navigation.svelte';
   import { goto } from '$app/navigation';
   import { Datepicker } from 'flowbite-svelte';
   let first_name = ''; 

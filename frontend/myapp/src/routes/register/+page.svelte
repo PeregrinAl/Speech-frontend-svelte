@@ -1,5 +1,5 @@
 <script>
-import Nav from '../../components/Navigation.svelte';
+import Nav from '$lib/Navigation.svelte';
 </script>
 <Nav/>
 <div class="columns-2 text-center rounded-md py-20">
