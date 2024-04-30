@@ -1,5 +1,4 @@
 <script>
-    import Nav from '$lib/Navigation.svelte';
     import Modal from '$lib/Modal.svelte';
     let showModal = false;
     let patientId = 0;
@@ -77,7 +76,6 @@
     }
 </style>
 
-<Nav/>
 <Modal bind:showModal>
     <label>
         Идентификатор пациента
