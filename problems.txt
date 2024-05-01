@@ -1,3 +1,15 @@
-frontend/myapp/src/routes/register/patient/+page.svelte --- Съезжает фон при первом запуске, при перезагрузке норм
-frontend/myapp/src/routes/register/patient/+page.svelte --- Не работает dataPicker, из-за него не работает регистрация
-frontend/myapp/src/routes/register/specialist/+page.svelte --- Нужно добавить загрузку файла jpg/pdf с дипломом
+🟢frontend/myapp/src/routes/register/patient/+page.svelte --- Съезжает фон при первом запуске, при перезагрузке норм
+✅Убрала datapicker
+
+🟢frontend/myapp/src/routes/register/patient/+page.svelte --- Не работает dataPicker, из-за него не работает регистрация
+✅Убрала datapicker
+
+🟢frontend/myapp/src/routes/register/patient/+page.svelte --- Нужно сделать нормальный формат ввода даты (три инпута, например)
+🟢frontend/myapp/src/routes/register/specialist/+page.svelte --- Нужно добавить загрузку файла jpg/pdf с дипломом
+
+🔴backend\speech_is_simple_main\speech_is_simple\models.py --- добавить таблицу специалист-пациент
+🔴frontend/myapp/src/routes/register/specialist/+page.svelte --- добавить fetch для получения данных о пациентах связанных со специалистом
+🔴backend\speech_is_simple_main\speech_is_simple\views.py --- добавить view для для получения данных о пациентах связанных со специалистом
+
+🔴backend --- добавить приложение для работы с упражнениями
+🟢frontend/myapp/src/routes/register/specialist/+page.svelte --- набросать окно для создания сценария
