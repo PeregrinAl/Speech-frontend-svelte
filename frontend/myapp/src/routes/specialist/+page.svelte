@@ -1,5 +1,7 @@
 <script>
     import Modal from '$lib/Modal.svelte';
+	export let data;
+
     let showModal = false;
     let patientId = 0;
 	const addUser = async() => {
@@ -29,72 +31,47 @@
 
 		}
   }
+  const addScenario = async() => {
+	// TODO:
+  }
+  function handleClick() {
+		data.summaries.slice(1);
+	}
 </script>
 
-<style>
-	.specialistPage {
-		display: flex;
-		justify-content: space-between;
-        background-color: #ececf8;
-	}
-    
-	button {
-		display: block;
-		min-width: 210px;
-		border: 2px solid transparent;
-		border-radius: 6px;
-		margin: 10px;
-		padding: 9px 15px;
-		color: rgb(135, 138, 184);
-		font-size: 18px;
-		font-weight: 300;
-        font-family: "Roboto", sans-serif;
-		transition: background-color 0.2s linear;
-	}
-	button:hover {
-		background-color: #bbe4b6;
-		cursor: pointer;
-		transition: background-color 0.2s linear;
-	}
-	
-	button:focus-visible {
-		border: 2px solid #bbe4b6;
-		outline: none;
-	}
-    button:focus {
-		border: 2px solid #bbe4b6;
-		outline: none;
-	}
-    button:disabled {
-		opacity: 0.5;
-		cursor: not-allowed;
-	}
-    label {
-        font-size: 18px;
-        color: rgb(135, 138, 184);
-        font-family: "Roboto", sans-serif;
-    }
-</style>
-
 <Modal bind:showModal>
-    <label>
-        Идентификатор пациента
-        <input
-          bind:value={patientId}
-          type='number'
-          name="name"
-          id="name"
-          placeholder="Идентификатор"
-          required
-          >
-      </label>
+	<div>
+        <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">Введите идентификатор пациента: </label>
+        <div class="mt-2.5">
+          <input  bind:value={patientId} type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        </div>
+      </div>
 </Modal>
-<dev class='specialistPage'>
-<dev class='scenarios'>
-	<button>Добавить сценарий</button>
-</dev>
-
-<dev class='patients'>
-	<button on:click={addUser}>Добавить пациента</button>
-</dev>
+<dev class="grid grid-cols-2 gap-2 m-2">
+	<dev class="rounded-md bg-indigo-100">
+		<button class="bg-indigo-300 hover:bg-indigo-400 text-white font-bold p-2 m-2 rounded-md font-mono text-xl on:click={addScenario}">Добавить сценарий</button>
+	</dev>
+	
+	<dev class="rounded-md bg-indigo-100">
+		<button class="bg-indigo-300 hover:bg-indigo-400 text-white font-bold p-2 m-2 rounded-md font-mono text-xl" on:click={addUser}>Добавить пациента</button>
+		<div>
+			<ul>
+				{#each data.summaries as { first_name, last_name, date_of_birth}}
+				<li class="rounded-md bg-white m-2">
+					<dev class="grid grid-cols-2 m-2">
+						<dev class="rounded-md">
+							<p class="m-2 font-mono text-xl py-30 leading-8 text-gray-700">{first_name} {last_name}, {date_of_birth}						
+							</p>
+						</dev>
+						<dev class="rounded-md text-right">
+							<button class="m-2">📊</button>
+							<button class="m-2">➕</button>
+							<button class="m-2" on:click={handleClick}>🗑</button>
+						</dev>
+					</dev>
+			    </li>
+				{/each}
+			</ul>
+		</div>
+	</dev>
 </dev>

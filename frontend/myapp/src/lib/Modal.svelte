@@ -18,8 +18,8 @@
 		<slot />
 		<!-- svelte-ignore a11y-autofocus -->
         <div class="spaceBetween">
-		<button autofocus on:click={() => dialog.close()}>Закрыть</button>
-        <button on:click={() => dialog.close()}>Добавить</button>
+		<button class="bg-indigo-300 hover:bg-indigo-400 text-white font-bold p-2 my-2 rounded-md font-mono" autofocus on:click={() => dialog.close()}>Закрыть</button>
+        <button class="bg-indigo-300 hover:bg-indigo-400 text-white font-bold p-2 my-2 rounded-md font-mono" on:click={() => dialog.close()}>Добавить</button>
     </div>
 	</div>
 </dialog>
@@ -27,10 +27,9 @@
 <style>
     
 	dialog {
-		max-width: 50em;
+		max-width: 40em;
 		border-radius: 0.2em;
 		border: none;
-		padding: 0;
 	}
 	dialog > div {
 		padding: 1em;
@@ -56,11 +55,6 @@
 		to {
 			opacity: 1;
 		}
-	}
-	button {
-        color: rgb(135, 138, 184);
-        font-family: "Roboto", sans-serif;
-		display: block;
 	}
     .spaceBetween {
         display: flex;
