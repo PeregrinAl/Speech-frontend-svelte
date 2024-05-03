@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
-from .serializers import PatientSerializer, SpecialistSerializer
-from .models import Patient, Specialist, User
+from .serializers import PatientSerializer, SpecialistPatientSerializer, SpecialistSerializer
+from .models import Patient, Specialist, SpecialistPatient, User
 import jwt, datetime
 
 class PatientRegisterView(APIView):
@@ -40,15 +40,17 @@ class LoginView(APIView):
         }
 
         token = jwt.encode(payload, 'secret', algorithm='HS256')
-        
+
         response = Response()
 
         response.set_cookie(key='jwt', value=token, httponly=True)
         response.set_cookie(key='type', value=user.type, httponly=True)
+        response.set_cookie(key='id', value=user.id, httponly=False)
 
         response.data = {
             'jwt': token,
-            'type': user.type
+            'type': user.type,
+            'id': user.id
         }
 
         return response
@@ -78,7 +80,50 @@ class LogoutView(APIView):
         response = Response()
         response.delete_cookie('jwt')
         response.delete_cookie('type')
+        response.delete_cookie('id')
         response.data = {
             'message': 'success'
         }
         return response
+
+class AddUserView(APIView):
+    def post(self, request):
+        # TODO: проверить
+        patientId = request.data['patientId']
+        specialist = request.COOKIES.get('id')
+        
+        patient = Patient.objects.get(id = patientId)
+        specialist = Specialist.objects.get(id = specialist)
+        
+        response = Response()
+        
+        relation = SpecialistPatient.objects.filter(specialist=specialist) & SpecialistPatient.objects.filter(patient=patient)
+        if not relation:
+            SpecialistPatient.objects.create(specialist=specialist, patient = patient)
+            response.data = {
+                'message': 'success'
+            }
+        else:
+            response.data = {
+                'message': relation
+            }
+
+        return Response('')
+    
+class getPatientsView(APIView):
+    def get(self, request):
+        specialist = request.COOKIES.get('id')
+        if True:
+            response = Response()
+            response.data = {
+                'token': request.COOKIES.get('id')
+                }
+            patients = Patient.objects.filter(specialistpatient__specialist_id=specialist)
+            serializer = PatientSerializer(patients, many=True)
+            return Response(serializer.data)
+        else:
+            return Response({'user_id': token})
+
+
+
+    

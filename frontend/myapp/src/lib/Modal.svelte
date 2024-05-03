@@ -17,10 +17,7 @@
 		<slot name="header" />
 		<slot />
 		<!-- svelte-ignore a11y-autofocus -->
-        <div class="spaceBetween">
 		<button class="bg-indigo-300 hover:bg-indigo-400 text-white font-bold p-2 my-2 rounded-md font-mono" autofocus on:click={() => dialog.close()}>Закрыть</button>
-        <button class="bg-indigo-300 hover:bg-indigo-400 text-white font-bold p-2 my-2 rounded-md font-mono" on:click={() => dialog.close()}>Добавить</button>
-    </div>
 	</div>
 </dialog>
 
@@ -56,8 +53,4 @@
 			opacity: 1;
 		}
 	}
-    .spaceBetween {
-        display: flex;
-        justify-content: space-between;
-    }
 </style>

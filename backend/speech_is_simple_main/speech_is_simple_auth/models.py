@@ -17,8 +17,14 @@ class User(AbstractUser):
     
 
 class Specialist(User):
-    pass
+    is_verified = models.BooleanField(default=True) # TODO: ОПАСНО
 
 class Patient(User):
     date_of_birth = models.DateField()
 
+# SpecialistPatient
+
+# TODO
+class SpecialistPatient(models.Model):
+    patient = models.ForeignKey(Patient, on_delete = models.PROTECT)
+    specialist = models.ForeignKey(Specialist, on_delete = models.PROTECT)

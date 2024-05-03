@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Patient, Specialist
+from .models import Patient, Specialist, SpecialistPatient, User
 
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,7 +20,7 @@ class PatientSerializer(serializers.ModelSerializer):
 class SpecialistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Specialist
-        fields = ['first_name', 'last_name', 'email', 'type','password']
+        fields = ['first_name', 'last_name', 'email', 'type', 'password']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -35,7 +35,7 @@ class SpecialistSerializer(serializers.ModelSerializer):
     
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Specialist
+        model = User
         fields = ['email', 'password']
         extra_kwargs = {
             'password': {'write_only': True}
@@ -48,3 +48,15 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+    
+class SpecialistPatientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SpecialistPatient
+        fields = ['specialistId', 'patientId']
+
+    def create(self, validated_data):
+        instance = self.Meta.model(**validated_data)
+        instance.save()
+        return instance
+    
+

@@ -1,6 +1,6 @@
 <script>
   import { goto } from '$app/navigation';
-  import { Datepicker } from 'flowbite-svelte';
+  
   let first_name = ''; 
   let last_name = '';
   let email = '';
