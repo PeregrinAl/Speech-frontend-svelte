@@ -1,14 +1,91 @@
 <script>
   import {authenticated} from '../../stores/auth';
+  import {csrfToken} from '../../stores/auth';
   import { goto } from '$app/navigation';
+  import { onMount } from 'svelte';
+  let email = '', password = '', csrfTokenValue = '';
+  function getCookie(name) {
+    let cookieValue = null;
+    console.log(document.cookie);
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      console.log(cookies);
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
 
-  let email = '', password = ''
-  
+  csrfToken.subscribe((value) => {
+		csrfTokenValue = value;
+	});
+
+  function getCSRF(){
+    fetch("http://localhost:8000/auth/csrf", {
+      credentials: "same-origin",
+    })
+    .then((res) => {
+      let csrfToken = getCookie("X-CSRFToken");
+      csrfToken.set(csrfToken);
+      console.log(csrfTokenValue);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  function getSession(){
+    fetch("http://localhost:8000/auth/session", {
+      credentials: "same-origin",
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      if (data.isAuthenticated) {
+        authenticated.set(true);
+      } else {
+        authenticated.set(false);
+        getCSRF();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  function whoami() {
+    fetch("http://localhost:8000/auth/whoami/", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "same-origin",
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("You are logged in as: " + data.username);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  onMount(() => {
+    getSession();
+  });
+
   const submit = async() => {
     try {
       const response = await fetch('http://localhost:8000/auth/login', {
           method: 'POST',
-          headers: {'Content-Type': 'application/json'},
+          headers: {'Content-Type': 'application/json',
+          'X-CSRFToken': csrfTokenValue
+          },
           credentials: "include",
           body: JSON.stringify({
               email,
@@ -16,6 +93,7 @@
           })
       });
       const content = await response.json();
+      console.log(content);
       if (content.type == "SPECIALIST") {
         authenticated.set(true);
         goto('/specialist');
@@ -28,7 +106,6 @@
         
       }
     } catch {
-      authenticated.set(false);
       console.log('fail');
     }
   }

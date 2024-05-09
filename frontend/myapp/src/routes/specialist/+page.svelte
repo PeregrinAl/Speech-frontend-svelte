@@ -1,17 +1,28 @@
 <script>
     import Modal from '$lib/Modal.svelte';
+	import {csrfToken} from '../../stores/auth';
 	export let data;
 
     let showModal = false;
     let patientId = 0;
 
+	function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
 	// getPatients
 	const addUser = async() => {
 		showModal = true;
 		try {
+			csrfToken = getCookie('csrftoken');
+			console.log(csrfToken);
 			const response = await fetch('http://localhost:8000/auth/addpatient', {
 				method: 'POST',
-				headers: {'Content-Type': 'application/json'},
+				headers: {'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken // Include the CSRF token in the header
+				},
 				credentials: "include",
 				body: JSON.stringify({
 					patientId
@@ -43,7 +54,7 @@
 	}
 </script>
 
-<Modal bind:showModal addPatient=addUser>
+<Modal bind:showModal>
 	<div>
         <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">Введите идентификатор пациента: </label>
         <div class="mt-2.5">

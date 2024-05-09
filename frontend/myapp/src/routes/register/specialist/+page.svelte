@@ -3,6 +3,7 @@
 
   import { goto } from '$app/navigation';
   
+  let is_verified = false;
   let first_name = ''; 
   let last_name = '';
   let email = '';
@@ -17,9 +18,12 @@
           body: JSON.stringify({
             first_name,
             last_name,
-            email,
-            type,
-            password,
+            is_verified,
+            user: {
+              email,
+              type,
+              password,
+            }
           })
       });
       const content = await response.json();

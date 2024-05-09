@@ -16,10 +16,12 @@
           body: JSON.stringify({
             first_name,
             last_name,
-            email,
-            type,
-            password,
             date_of_birth,
+            user: {
+              email,
+              type,
+              password,
+            }
           })
       });
       const content = await response.json();

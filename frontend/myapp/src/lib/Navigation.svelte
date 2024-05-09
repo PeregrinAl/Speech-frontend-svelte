@@ -1,18 +1,103 @@
 <script>
-    import {authenticated} from "../stores/auth";
+    import { authenticated } from "../stores/auth";
+    import { csrfToken } from '../stores/auth';
+    import { onMount } from 'svelte';
+    let csrfTokenValue = '';
+
+    csrfToken.subscribe((value) => {
+		    csrfTokenValue = value;
+	    });
+
+    function getCookie(name) {
+        let cookieValue = null;
+        console.log(document.cookie);
+        if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        console.log(cookies);
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+            }
+        }
+        }
+        return cookieValue;
+    }
+    function getCSRF(){
+    fetch("http://localhost:8000/auth/csrf", {
+      credentials: "same-origin",
+    })
+    .then((res) => {
+      let csrfToken = getCookie("X-CSRFToken");
+      csrfToken.set(csrfToken);
+      console.log(csrfTokenValue);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  function getSession(){
+    fetch("http://localhost:8000/auth/session", {
+      credentials: "same-origin",
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      if (data.isAuthenticated) {
+        authenticated.set(true);
+        console.log('logout: authenticated !!');
+      } else {
+        authenticated.set(false);
+        console.log('logout: not authenticated ')
+        getCSRF();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+  let auth = false;
+    onMount(() => {
+        getSession();
+    });
+
     
-    let auth = false;
+
 
     authenticated.subscribe(a => auth = a);
-    
-    const logout = async () => {
-        await fetch('http://localhost:8000/auth/logout', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
+    function logout() {
+        console.log(csrfTokenValue)
+        fetch("http://localhost:8000/auth/logout", {
+            credentials: "same-origin",
+            'X-CSRFToken': csrfTokenValue,
+            method: "POST"
+        })
+        .then(this.isResponseOk)
+        .then((data) => {
+            console.log(data, 'logging out');
+            authenticated.set(false);
+            console.log('generating new csrf');
+            getCSRF();
+        })
+        .catch((err) => {
+            console.log(err, 'logout error');
         });
-        authenticated.set(false);
-    }
+    };
+    
+    // const logout = async () => {
+    //     console.log(csrfTokenValue);
+    //     await fetch('http://localhost:8000/auth/logout', {
+    //         method: 'POST',
+    //         headers: {'Content-Type': 'application/json',
+    //         'X-CSRFToken': csrfTokenValue
+    //         },
+    //         credentials: 'include',
+    //     });
+    //     authenticated.set(false);
+    // }
 </script>
 
 <style scoped>
